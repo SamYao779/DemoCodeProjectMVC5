@@ -1,0 +1,72 @@
+﻿@model ProjectMVC5.Order
+
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLable">Add Item</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group row">
+            <label class="col-md-2">Order Id:</label>
+            <label class="col-md-5">@Model.Id</label>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-2">Customer:</label>
+            <label class="col-md-5">@Model.Customer.FullName</label>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-2">Receiver:</label>
+            <label class="col-md-5">@Model.Receiver</label>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-2">OrderDate:</label>
+            <label class="col-md-5">@Html.FormatValue(Model.OrderDate, "{0:dd/MM/yyyy}")</label>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-2">Address:</label>
+            <label class="col-md-5">@Model.Address</label>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-2">Phone:</label>
+            <label class="col-md-5">@Model.Phone</label>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-2">Notes:</label>
+            <label class="col-md-5">@Model.Description</label>
+        </div>
+
+        <fieldset>
+            <legend></legend>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ProductNo</th>
+                        <th>Photo</th>
+                        <th>UnitPrice</th>
+                        <th>Quantity</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var p in Model.OrderDetails)
+                    {
+                        <tr>
+                            <td>@p.Product.ProductNo</td>
+                            <td>
+                                <img src="~/Images/Products/@p.Product.Image" style="width:50px;" />
+                            </td>
+                            <td>@Html.FormatValue(p.UnitPrice, "{0:c}")</td>
+                            <td>@p.Quantity</td>
+                            <td>@Html.FormatValue(p.Quantity * p.UnitPrice, "{0:c}")</td>
+
+                        </tr>
+                    }
+                    <tr>
+                        <th colspan="4">Total:</th>
+                        <th>@Html.FormatValue((Model.OrderDetails.Sum(p => p.Quantity * p.UnitPrice)), "{0:c}")</th>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+</div>

@@ -1,0 +1,93 @@
+﻿@model ProjectMVC5.Order
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<h2>Checkout</h2>
+@Html.ValidationSummary()
+@using (Html.BeginForm("Purchase", "Order"))
+{
+    <div class="row form-group">
+        <div class="col-md-4">Customer Id:</div>
+        <div class="col-md-6">
+            @Html.TextBoxFor(o => o.CustomerId, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-4">Receiver:</div>
+        <div class="col-md-6">
+            @Html.TextBoxFor(o => o.Receiver, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-4">OrderDate:</div>
+        <div class="col-md-6">
+            @Html.TextBoxFor(o => o.OrderDate, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-4">Address:</div>
+        <div class="col-md-6">
+            @Html.TextBoxFor(o => o.Address, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-4">Phone:</div>
+        <div class="col-md-6">
+            @Html.TextBoxFor(o => o.Phone, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-4">Notes:</div>
+        <div class="col-md-6">
+            @Html.TextAreaFor(o => o.Description, new { @class = "form-control", rows = 5 })
+        </div>
+    </div>
+    @Html.Hidden("OrderStateId", 0)
+    <div class="row form-group">
+        <div class="col-md-4"></div>
+        <div class="col-md-6">
+            <button class="btn btn-default">Purchase</button>
+            <a href="/Home" class="btn btn-default">Coninue Shopping</a>
+        </div>
+    </div>
+}
+
+<fieldset>
+    <legend>Các sản phẩm đã chọn</legend>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>ProductNo</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Photo</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var cart = ProjectMVC5.Models.ShoppingCart.Cart;
+                foreach (var p in cart.Items)
+                {
+                    <tr>
+                        <td>@p.Id</td>
+                        <td>@p.ProductNo</td>
+                        <td>@Html.FormatValue(p.Price, "{0:c}")</td>
+                        <td>@p.Quantity</td>
+                        <td>
+                            <img src="~/Images/Products/@p.Image" style="width:50px" />
+                        </td>
+                        <td>@Html.FormatValue(p.Quantity * p.Price, "{0:c}")</td>
+                    </tr>
+                }
+            }
+
+            <tr>
+                <th colspan="5">Total:</th>
+                <th>@Html.FormatValue(cart.Amout, "{0:c}")</th>
+            </tr>
+        </tbody>
+    </table>
+</fieldset>

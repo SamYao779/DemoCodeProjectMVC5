@@ -1,0 +1,52 @@
+﻿@using Microsoft.AspNet.Identity.EntityFramework
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>User Role</h2>
+<div class="col-md-3">
+    @Html.DropDownList("User", new SelectList(ViewBag.User, "Id", "UserName"), "----Select UserName----", new { @class = "form-control" })
+</div>
+@foreach (ProjectMVC5.Models.ApplicationUser u in ViewBag.User)
+{
+    var role = u.Roles.Select(p => p.RoleId).Distinct().ToList();
+    <div class="col-md-3">
+        <fieldset id="user-role">
+            <legend>@u.UserName</legend>
+            <ul>
+                @foreach (IdentityRole r in ViewBag.Role)
+                {
+                    <li>
+                        <label>
+                            @if (role.Contains(r.Id))
+                            {
+                                <input checked type="checkbox" data-role="@r.Id" data-user="@u.Id" class="check" />@r.Name
+                            }
+                            else
+                            {
+                                <input type="checkbox" data-role="@r.Id" data-user="@u.Id" class="check" />@r.Name
+                            }
+                        </label>
+                    </li>
+                }
+            </ul>
+        </fieldset>
+    </div>
+}
+@section Scripts{
+    <script>
+        $(function () {
+            $(".check").click(function () {
+                var roleId = $(this).attr("data-role");
+                var userId = $(this).attr("data-user");
+                $.ajax({
+                    url: "/Admin/UserRole/Update",
+                    data: { Role_Id: roleId, User_Id: userId },
+                    success: function (result) {
+                       // alert(result);
+                    }
+                });
+            });
+        });
+    </script>
+}

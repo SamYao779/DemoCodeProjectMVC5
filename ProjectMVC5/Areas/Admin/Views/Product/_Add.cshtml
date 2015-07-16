@@ -1,0 +1,81 @@
+﻿@model ProjectMVC5.Product
+
+@using (Html.BeginForm("Add", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLable">Add Item</h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group row">
+                <label class="col-md-3">Mã Sản phẩm</label>
+                <div class="col-md-5">
+                    @Html.TextBoxFor(p => p.ProductNo, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Nhãn hiệu</label>
+                <div class="col-md-5">
+                    @Html.DropDownListFor(p => p.CategoryId, new SelectList(ViewBag.Category, "Id", "Name"), "---Select Category---", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Kiểu dáng</label>
+                <div class="col-md-5">
+                    @Html.RadioButtonFor(p => p.Gender, "Nam") Nam
+                    @Html.RadioButtonFor(p => p.Gender, "Nữ") Nữ
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Kiểu máy</label>
+                <div class="col-md-5">
+                    @Html.TextBoxFor(p => p.Movement, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Chất liệu vỏ</label>
+                <div class="col-md-5">
+                    @Html.TextBoxFor(p => p.CaseMaterial, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Chất liệu dây</label>
+                <div class="col-md-5">
+                    @Html.TextBoxFor(p => p.BandMaterial, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Số lượng</label>
+                <div class="col-md-5">
+                    @Html.TextBoxFor(p => p.Quantity, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Giá tiền</label>
+                <div class="col-md-5">
+                    @Html.TextBoxFor(p => p.Price, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3">Bảo hành</label>
+                <div class="col-md-5">
+                    @Html.TextBoxFor(p => p.Warranty, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3"></label>
+                <div class="col-md-5">
+                    <input type="file" name="upImage" id="upImage"/>
+                    @*@Html.HiddenFor(p => p.Image)*@
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Add</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Index";
+    var items = ProjectMVC5.Models.ShoppingCart.Cart.Items;
+}
+
+<h2>Shooping Cart</h2>
+@using (Html.BeginForm())
+{
+    <table class="table table-bordered tbl-cart">
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Amount</th>
+        </tr>
+        @foreach (var p in items)
+        {
+            <tr id="@p.Id">
+                <td>@p.ProductNo</td>
+                <td>@Html.FormatValue(p.Price, "{0:c}")</td>
+                <td>
+                    <input name="@p.Id" value="@p.Quantity" size="1" />
+                </td>
+                <td>@Html.FormatValue(p.Price * p.Quantity, "{0:c}")</td>
+                <td>
+                    <a href="/Cart/Remove/@p.Id" class="btn btn-danger pull-right remove-cart"><i class="glyphicon glyphicon-trash"></i></a>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="3"><b>Total:</b></td>
+            <td id="amount"><b>@Html.FormatValue(ProjectMVC5.Models.ShoppingCart.Cart.Amout, "{0:c}")</b>
+            </td>
+        </tr>
+    </table>
+    <div>
+        <button class="btn btn-default" onclick="form.action='/Cart/Update'">Update</button>
+        <button class="btn btn-default" onclick="form.action='/Cart/Clear'">Clear</button>
+        <a class="btn btn-default" href="/Home">Continue</a>
+        @if (!Request.IsAuthenticated)
+        {
+            <div class="btn btn-default" id="button1">Order</div>
+        }
+        else if (ProjectMVC5.Models.ShoppingCart.Cart.Count == 0)
+        {
+            <div class="btn btn-default" id="button2">Order</div>
+        }
+        else
+        {
+            <a class="btn btn-default" href="/Order/CheckOut">Order</a>
+        }
+    </div>
+}
+
+
+

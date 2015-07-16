@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNet.Identity
+@using ProjectMVC5.Resources
+<ul class="nav navbar-nav">
+    <li><a href="/Home">@Common.Page</a></li>
+    <li><a href="/Home/About">@Common.About</a></li>
+    <li><a href="">@Common.Contact</a></li>
+    <li><a href="">@Common.Feedback</a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+    @if (Request.IsAuthenticated)
+    {
+        var Username = User.Identity.GetUserName();
+        var db = new ProjectMvcDbContext();
+        var user = db.Customers.Single(p => p.Id == Username);
+        if (user.IdGroup != 0)
+        {
+            <li><a href="/Admin/Home/Index">@Common.AdminPage</a></li>
+        }
+    }
+    <li style="margin-top:9px; margin-right:20px">
+        <form action="/Product/Search" method="post">
+            @Html.TextBox("ProdNo", null, new { Placeholder = "Search by ProductNo", @class = "form-control keyword", })
+        </form>
+    </li>
+</ul>

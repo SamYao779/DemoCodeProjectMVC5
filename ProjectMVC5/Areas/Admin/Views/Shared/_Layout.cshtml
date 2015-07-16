@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container">
+        <div class="row" style="background: none repeat scroll #F0F0E9">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle btn-lg glyphicon glyphicon-align-justify" data-toggle="collapse" data-target=".menu1">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse menu1">
+                @Html.Partial("_Menu_Top")
+            </div>
+        </div>
+        <header class="row p-header">
+            <div class="p-banner" id="slider" style="width:100%; height:100%;">
+                <div class="ls-slide" data-ls="slidedelay:5500; transition2d:10,20,77;">
+                    <img src="~/Images/Slider2.jpg" class="ls-bg" alt="Slide background" />
+                    <a href="/Home" class="ls-link"></a>
+                </div>
+                <div class="ls-slide" data-ls="slidedelay:5500; transition2d:22,10,48;">
+                    <img src="~/Images/Slider1.jpg" class="ls-bg" alt="Slide background" />
+                    <a href="/Home" class="ls-link"></a>
+                </div>
+                <div class="ls-slide" data-ls="slidedelay:5500; transition2d:105,65,33;">
+                    <img src="~/Images/Slider3.jpg" class="ls-bg" alt="Slide background" />
+                    <a href="/Home" class="ls-link"></a>
+                </div>
+                <div class="ls-slide" data-ls="slidedelay:5500; transition2d:110,71,29;">
+                    <img src="~/Images/Slider4.jpg" class="ls-bg" alt="Slide background" />
+                    <a href="/Home" class="ls-link"></a>
+                </div>
+                <div class="ls-slide" data-ls="slidedelay:5500; transition2d:23,107,94;">
+                    <img src="~/Images/Slider5.jpg" class="ls-bg" alt="Slide background" />
+                    <a href="/Home" class="ls-link"></a>
+                </div>
+            </div>
+        </header>
+        <div class="row" style="background: none repeat scroll #F0F0E9">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle btn-lg glyphicon glyphicon-align-justify" data-toggle="collapse" data-target=".menu2">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse menu2">
+                <ul class="nav navbar-nav">
+                    <li><a href="/Home">Trang chủ</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Quản lý <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Admin/Product">Hàng hóa</a></li>
+                            <li><a href="/Admin/Category">Nhãn hiệu</a></li>
+                            <li><a href="/Admin/Customer">Khách hàng</a></li>
+                            <li><a href="/Admin/Order">Đơn hàng</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Thống kê <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="media-heading">Thống kê hàng tồn</li>
+                            <li><a href="/Admin/Inventory">Sản phẩm tồn kho</a></li>
+                            <li class="media-heading">Thống kê doanh số</li>
+                            <li><a href="/Admin/Revenue/ByCategory">Doanh số nhãn hiệu</a></li>
+                            <li><a href="/Admin/Revenue/ByProduct">Doanh số sản phẩm</a></li>
+                            <li><a href="/Admin/Revenue/ByCustomer">Doanh số từng khách hàng</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/Admin/Revenue/ByYear">Doanh số hàng năm</a></li>
+                            <li><a href="/Admin/Revenue/ByMonth">Doanh số hàng tháng</a></li>
+                            <li><a href="/Admin/Revenue/ByQuarter">Doanh số hàng quí</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Phân quyền <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Admin/User">Quản lý tài khoản</a></li>
+                            <li><a href="/Admin/Role">Quản lý vai trò</a></li>
+                            <li><a href="/Admin/UserRole">Phân vai trò</a></li>
+                            <li><a href="/Admin/Permission">Phân quyền</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="p-sheet row">
+            <div style="min-height:500px;">
+                @RenderBody()
+            </div>
+            <hr />
+            <div class="backtop"></div>
+        </div>
+        <footer class="p-footer row">
+            @Html.Partial("_Footer")
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/LayerSlider/js/greensock.js"></script>
+    <script src="~/LayerSlider/js/layerslider.transitions.js"></script>
+    <script src="~/LayerSlider/js/layerslider.kreaturamedia.jquery.js"></script>
+    <script src="~/jquery.bxslider/jquery.bxslider.min.js"></script>
+    <script src="~/Scripts/Modal.js"></script>
+    <script src="~/Scripts/main.js"></script>
+    <link href="~/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/LayerSlider/css/layerslider.css" rel="stylesheet" />
+    <link href="~/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<noembed>

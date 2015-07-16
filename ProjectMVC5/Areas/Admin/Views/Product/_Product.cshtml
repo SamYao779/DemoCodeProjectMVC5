@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ProjectMVC5.Product>
+<a href="/Admin/Product/Add" class="btn btn-primary btn-create">Add New Item</a>
+<br /><br />
+<table class="table table-bordered table-hover tbl-product">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Mã Sản phẩm</th>
+            <th>Nhãn hiệu</th>
+            <th>Kiểu dáng</th>
+            <th>Kiểu máy</th>
+            <th>Chất liệu vỏ</th>
+            <th>Chát liệu dây</th>
+            <th>Ảnh</th>
+            <th>Số lượng</th>
+            <th>Giá</th>
+            <th>bảo hành</th>
+            <th colspan="2"><a href="/Admin/Product/Add" class="btn btn-primary btn-create">Add New Item</a></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr class="tbody">
+                <td>@p.Id</td>
+                <td>@p.ProductNo</td>
+                <td>@p.Category.Name</td>
+                <td>@p.Gender</td>
+                <td>@p.Movement</td>
+                <td>@p.CaseMaterial</td>
+                <td>@p.BandMaterial</td>
+                <td>
+                    <img src="~/Images/Products/@p.Image" style="width:50px" />
+                </td>
+                <td>@p.Quantity</td>
+                <td>@Html.FormatValue(p.Price, "{0:c}")</td>
+                <td>@p.Warranty</td>
+                <td>
+                    <a href="/Admin/Product/Edit/@p.Id" class="btn-edit btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
+                </td>
+                <td>
+                    <a href="/Admin/Product/ConfirmDelete/@p.Id" class="btn-delete btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLable" aria-hidden="true">
+    <div class="modal-dialog">
+
+    </div>
+</div>
+
+<script src="~/Scripts/Modal.js"></script>

@@ -1,0 +1,78 @@
+﻿@using Microsoft.AspNet.Identity
+@using ProjectMVC5.Resources
+<ul class="nav navbar-nav">
+    <li><a><i class="glyphicon glyphicon-earphone"></i> (08) 113115</a></li>
+    <li><a><i class="glyphicon glyphicon-envelope"></i> tamt.35779@gmail.com</a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right pull-right">
+    <li class="dropdown">
+        @if (Request.IsAuthenticated)
+        {
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="glyphicon glyphicon-user"></i>
+                @User.Identity.GetUserName()<span class="caret"></span>
+            </a>
+        }
+        else
+        {
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="glyphicon glyphicon-user"></i>
+                @Common.Account
+                <span class="caret"></span>
+            </a>
+        }
+        <ul class="dropdown-menu" role="menu">
+            @if (!Request.IsAuthenticated)
+            {
+                <li><a href="/Account/Login" class="login">Đăng nhập</a></li>
+                <li><a href="/Account/ForgotPassword" class="forgotpass">Quên mật khẩu</a></li>
+                <li><a href="/Account/Register" class="register">Đăng ký thành viên</a></li>
+            }
+            else
+            {
+                <li><a href="/Account/LogOff">Đăng xuất</a></li>
+                <li><a href="/Account/Manage">Đổi mật khẩu</a></li>
+                <li><a href="/Account/EditProfile" class="editprofile">Cập nhật hồ sơ</a></li>
+                <li class="divider"></li>
+                <li><a href="/Order/OrderList">Đơn hàng</a></li>
+                <li><a href="/Product/ProductUser">Hàng đã mua</a></li>
+            }
+
+        </ul>
+    </li>
+    @if (Request.Cookies["lang"].Value == "en")
+    {
+        <li>
+            <a href="" data-lang="vi">
+                <i class="glyphicon glyphicon-flag">
+                </i> Tiếng Việt
+            </a>
+        </li>
+    }
+    else
+    {
+        <li>
+            <a href="" data-lang="en">
+                <i class="glyphicon glyphicon-flag">
+                </i> English
+            </a>
+        </li>
+    }
+    @*<li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="glyphicon glyphicon-flag">
+                </i> @Common.Languages<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="" data-lang="en">English</a></li>
+                <li><a href="" data-lang="vi">Tiếng Việt</a></li>
+            </ul>
+        </li>*@
+    <li><a href="/Cart/Index"><i class="glyphicon glyphicon-shopping-cart" id="cart"></i> @Common.Cart</a></li>
+</ul>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+
+    </div>
+</div>

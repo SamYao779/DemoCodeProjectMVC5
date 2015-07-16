@@ -1,0 +1,13 @@
+﻿@using ProjectMVC5.Resources
+<div class="panel panel-info">
+    <div class="panel-heading panel-title">
+        <span class="glyphicon glyphicon-star-empty"></span>
+        <strong>@Common.Gender</strong>
+    </div>
+
+    <div class="list-group">
+        <a href="@Url.Action("ProductList", "Product", new { id="Male",List="ForMan"})" class="list-group-item">@Common.Male</a>
+        <a href="@Url.Action("ProductList", "Product", new { id="Female",List="ForWomen"})" class="list-group-item">@Common.Female</a>
+    </div>
+</div>
+

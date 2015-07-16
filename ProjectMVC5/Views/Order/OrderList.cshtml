@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ProjectMVC5.Order>
+@{
+    ViewBag.Title = "OrderList";
+}
+
+<h4>Your Order List</h4>
+<br />
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Customer</th>
+            <th>Receiver</th>
+            <th>Order Date</th>
+            <th>Order State</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.Id</td>
+                <td>@p.Customer.FullName</td>
+                <td>@p.Receiver</td>
+                <td>@Html.FormatValue(p.OrderDate, "{0:dd/MM/yyyy}")</td>
+                <td>@p.OrderState.Status</td>
+                <th>@Html.FormatValue((p.OrderDetails.Sum(c => c.Quantity * c.UnitPrice)), "{0:c}")</th>
+                <td>
+                    <a href="/Order/OrderDetail/@p.Id" class="btn btn-default btn-check">Detail</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+
+    </div>
+</div>

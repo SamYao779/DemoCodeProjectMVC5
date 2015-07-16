@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ProjectMVC5.Product>
+
+<div class="panel-primary">
+    @if (ViewBag.Title != null)
+    {
+        <div class="panel-heading panel-title">
+            <b>@ViewBag.Title</b>
+        </div>
+    }
+    <div class="panel-body">
+        @foreach (var p in Model)
+        {
+            <div class="box">
+                <div>
+                    <b>@p.ProductNo</b>
+                    <p>
+                        <a href="@Url.Action("Detail", "Product", new { id=p.Id,p.ProductNo})">
+                            <img class="image" src="~/Images/Products/@p.Image" />
+                        </a>
+                    </p>
+                    <span class="price">
+                        <b>$@Html.FormatValue(p.Price, "{0:0,0}")</b>
+                    </span>
+                    <span class="icon">
+                        <a href="/Cart/Add/@p.Id" class="add-cart">
+                            <img src="~/Images/add-to-cart.png" />
+                        </a>
+                    </span>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<style id="cart-fly"></style>
+<script src="~/Scripts/Cartfly.js"></script>
+<noembed>

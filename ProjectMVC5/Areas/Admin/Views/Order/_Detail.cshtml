@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ProjectMVC5.OrderDetail>
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLable">Detail</h4>
+    </div>
+    <div class="modal-body">
+        <table class="table table-bordered">
+            <tr>
+                <th>Id</th>
+                <th>Mã sản phẩm</th>
+                <th>Hình ảnh</th>
+                <th>Số lượng</th>
+                <th>Giá tiền</th>
+                <th>Thành tiền</th>
+            </tr>
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td>@p.Id</td>
+                    <td>@p.Product.ProductNo</td>
+                    <td>
+                        <img src="~/Images/Products/@p.Product.Image" style="width:50px" />
+                    </td>
+                    <td>@p.Quantity</td>
+                    <td>@Html.FormatValue(p.UnitPrice, "{0:c}")</td>
+                    <td><b>@Html.FormatValue(p.Quantity * p.UnitPrice, "{0:c}")</b></td>
+                </tr>
+            }
+            <tr>
+                <th colspan="5">Total:</th>
+                <th>@Html.FormatValue((Model.Sum(o => o.Quantity * o.UnitPrice)), "{0:c}")</th>
+            </tr>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+    </div>
+</div>

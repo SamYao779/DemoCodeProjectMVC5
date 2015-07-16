@@ -1,0 +1,16 @@
+﻿@model IEnumerable<ProjectMVC5.Category>
+<div class="panel panel-info">
+    <div class="panel-heading panel-title">
+        <span class="glyphicon glyphicon-th-list"></span>
+        <strong>@ProjectMVC5.Resources.Common.Category</strong>
+    </div>
+
+    <div class="list-group">
+        @foreach (var p in Model)
+        {
+            <a href="@Url.Action("ProductList", "Product", new { id=p.Id, List=p.Name})"
+               class="list-group-item">@p.Name</a>
+        }
+    </div>
+    
+</div>

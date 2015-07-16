@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ProjectMVC5.Areas.Admin.Models.Report>
+@{
+    ViewBag.Title = "Inventory";
+}
+
+<h2>Inventory</h2>
+<h3><i>@ViewBag.Message</i></h3>
+<table class="table table-bordered table-hover tbl-inven">
+    <thead>
+        <tr>
+            <th>Group</th>
+            <th>Sum</th>
+            <th>Count</th>
+            <th>Min</th>
+            <th>Max</th>
+            <th>Avg</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+            <tr>
+                <td>@r.Group</td>
+                <td>@Html.FormatValue(r.Amount, "{0:## ### ###}")</td>
+                <td>@Html.FormatValue(r.Count, "{0:## ### ###}")</td>
+                <td>@Html.FormatValue(r.Min, "{0:## ### ###}")</td>
+                <td>@Html.FormatValue(r.Max, "{0:## ### ###}")</td>
+                <td>@Html.FormatValue(r.Avg, "{0:## ### ###}")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load("visualization", "1", { packages: ["corechart"] });
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          @foreach(var p in Model)
+          {
+              <text>["@p.Group", @p.Count],</text>
+          }
+        ]);
+
+        var options = {
+            title: 'Inventory'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+    }
+</script>
+<div id="piechart" style="width: 100%;"></div>
+
+

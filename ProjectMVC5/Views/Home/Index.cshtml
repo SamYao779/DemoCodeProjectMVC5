@@ -1,0 +1,95 @@
+﻿@using ProjectMVC5.Resources
+<div class="panel panel-primary">
+    <div class="panel-heading panel-title">
+        <b>@Common.ExpensivePrice</b>
+        <div class ="navbar-right pull-right">
+            <a href="@Url.Action("ProductList", "Product", new { id = "High", List = "ExpensivePrice"})" class="more">@Common.More</a>
+        </div>
+    </div>
+    <div class="panel-body">
+        @foreach (var p in ViewBag.High)
+        {
+            <div class="box">
+                <div>
+                    <b>@p.ProductNo</b>
+                    <p>
+                        <a href="@Url.Action("Detail", "Product", new { id=p.Id,p.ProductNo})">
+                            <img class="image" src="~/Images/Products/@p.Image" title="@p.ProductNo" />
+                        </a>
+                    </p>
+                    <span class="price">
+                        <b>$@Html.FormatValue(p.Price, "{0:0,0}")</b>
+                    </span>
+                    <span class="icon">
+                        <a href="/Cart/Add/@p.Id" class="add-cart">
+                            <img src="~/Images/add-to-cart.png" />
+                        </a>
+                    </span>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading panel-title">
+        <b>@Common.MediumPrice</b>
+        <div class="navbar-right pull-right">
+            <a href="@Url.Action("ProductList", "Product", new { id="Medium",List="MediumPrice"})" class="more">@Common.More</a>
+        </div>
+    </div>
+    <div class="panel-body">
+        @foreach (var p in ViewBag.Medium)
+        {
+            <div class="box">
+                <div>
+                    <b>@p.ProductNo</b>
+                    <p>
+                        <a href="@Url.Action("Detail", "Product", new { id=p.Id,p.ProductNo})">
+                            <img class="image" src="~/Images/Products/@p.Image" title="@p.ProductNo" />
+                        </a>
+                    </p>
+                    <span class="price">
+                        <b>$@Html.FormatValue(p.Price, "{0:0,0}")</b>
+                    </span>
+                    <span class="icon">
+                        <a href="/Cart/Add/@p.Id" class="add-cart">
+                            <img src="~/Images/add-to-cart.png" />
+                        </a>
+                    </span>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading panel-title">
+        <b>@Common.CheapPrice</b>
+        <div class="navbar-right pull-right">
+            <a href="@Url.Action("ProductList", "Product", new { id="Low", List="CheapPrice"})" class="more">@Common.More</a>
+        </div>
+    </div>
+    <div class="panel-body">
+        @foreach (var p in ViewBag.Low)
+        {
+            <div class="box">
+                <div>
+                    <b>@p.ProductNo</b>
+                    <p>
+                        <a href="@Url.Action("Detail", "Product", new { id=p.Id,p.ProductNo})">
+                            <img class="image" src="~/Images/Products/@p.Image" title="@p.ProductNo" />
+                        </a>
+                    </p>
+                    <span class="price">
+                        <b>$@Html.FormatValue(p.Price, "{0:0,0}")</b>
+                    </span>
+                    <span class="icon">
+                        <a href="/Cart/Add/@p.Id" class="add-cart">
+                            <img src="~/Images/add-to-cart.png" />
+                        </a>
+                    </span>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<style id="cart-fly"></style>

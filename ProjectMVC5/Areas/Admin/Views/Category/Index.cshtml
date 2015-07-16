@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ProjectMVC5.Category>
+
+<h2>Category Management</h2>
+<a href="/Admin/Category/Add" class="btn btn-primary btn-create">Add New Item</a>
+<br /><br />
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Xuất xứ</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr class="tbody">
+                <td>@p.Id</td>
+                <td>@p.Name</td>
+                <td>@p.Origin</td>
+                <td>
+                    <a href="/Admin/Category/Edit/@p.Id" class="btn-edit btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
+                </td>
+                <td>
+                    <a href="/Admin/Category/ConfirmDelete/@p.Id" class="btn-delete btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+
+    </div>
+</div>

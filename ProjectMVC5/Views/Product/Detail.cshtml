@@ -1,0 +1,106 @@
+﻿@model ProjectMVC5.Product
+@{
+    ViewBag.Title = "Detail";
+}
+
+<div class="panel-primary">
+    <div class="panel-heading">
+        <div class="panel-title">
+            CHI TIẾT SẢN PHẨM
+        </div>
+    </div>
+    <div class="panel-body De">
+        <div class="col-md-4 DeImg">
+            <a href="~/Images/Products/@Model.Image">
+                <img src="~/Images/Products/@Model.Image" />
+            </a>
+        </div>
+        <div class="col-md-8 DeContent">
+            <h4 class="row">
+                <label class="col-md-4">Nhãn hiệu:</label>
+                <label class="col-md-8">@Model.Category.Name</label>
+            </h4>
+            <h4 class="row">
+                <label class=" col-md-4">Mã sản phẩm:</label>
+                <label class="col-md-8">@Model.ProductNo</label>
+            </h4>
+            <h4 class="row">
+                <label class=" col-md-4">Kiểu dáng:</label>
+                <label class="col-md-8">@Model.Gender</label>
+            </h4>
+            <h4 class="row">
+                <label class=" col-md-4">Kiểu máy:</label>
+                <label class="col-md-8">@Model.Movement</label>
+            </h4>
+            <h4 class="row">
+                <label class=" col-md-4">Chất liệu vỏ:</label>
+                <label class="col-md-8">@Model.CaseMaterial</label>
+            </h4>
+            <h4 class="row">
+                <label class=" col-md-4">Chất liệu dây:</label>
+                <label class="col-md-8">@Model.BandMaterial</label>
+            </h4>
+            <h4 class="row">
+                <label class=" col-md-4">Giá tiền:</label>
+                <label class="col-md-8">$@Html.FormatValue(Model.Price, "{0:0,0}")</label>
+            </h4>
+            <h4 class="row">
+                <label class=" col-md-4">Bảo hành:</label>
+                <label class="col-md-8">@Model.Warranty</label>
+            </h4>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-8">
+                    <a href="/Cart/AddNow/@Model.Id" class="btn btn-danger btn-lg btn-block"><b>BUY NOW</b></a>
+                </div>
+            </div><hr />
+            <div class="fb-like" data-href="http://onlinewatch.somee.com/Product/Detail/@Model.Id" data-width="100%" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+            <div class="fb-comments" data-href="http://onlinewatch.somee.com/Product/Detail/@Model.Id" data-width="100%" data-numposts="5" data-colorscheme="light"></div>
+        </div>
+    </div>
+</div>
+<div class="panel-info">
+    <div class="panel-heading">
+        <div class="panel-title">
+            <div class="row DeCate">
+                SẢN PHẨM CÙNG NHÃN HIỆU
+                <div class="navbar-right pull-right">
+                    <a href="@Url.Action("ProductList", "Product", new { id = Model.Category.Id,Model.Category.Name })" class="more" style="color:black">Xem tất cả >>></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="slider">
+            @foreach (var p in Model.Category.Products)
+            {
+                <ul class="SlideImg">
+                    <li>
+                        <a href="@Url.Action("Detail", "Product", new { id=p.Id,p.ProductNo})">
+                            <img class="image" src="~/Images/Products/@p.Image" />
+                        </a>
+                    </li>
+                </ul>
+            }
+        </div>
+    </div>
+</div>
+<div class="panel-info">
+    <div class="panel-heading">
+        <div class="panel-title">
+            SẢN PHẨM ĐÃ XEM
+        </div>
+    </div>
+    <div class="panel-body">
+        <ol>
+            @foreach (var p in ViewBag.view)
+            {
+                <li class="col-md-4">
+                    <a href="@Url.Action("Detail", "Product", new { id=p.Id,p.ProductNo})">@p.ProductNo</a>
+                </li>
+            }
+        </ol>
+    </div>
+</div>
+
+

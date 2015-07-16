@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "ProductList";
+}
+<div id="results"></div>
+<ul class="pager">
+    <li><button class="btn btn-toolbar">First</button></li>
+    <li><button class="btn btn-toolbar">Prev</button></li>
+    <li><button class="btn btn-toolbar">Next</button></li>
+    <li><button class="btn btn-toolbar">Last</button></li>
+</ul>
+@section scripts{
+    <script>
+        $(function () {
+            fnLoadPage();
+
+            $(".pager button").click(function () {
+                label = $(this).text().toLowerCase();
+                switch (label) {
+                    case "first":
+                        pageNo = 0;
+                        break;
+                    case "prev":
+                        if (pageNo > 0) {
+                            pageNo--;
+                        }
+                        break;
+                    case "next":
+                        if (pageNo < pageCount - 1) {
+                            pageNo++;
+                        }
+                        break;
+                    case "last":
+                        pageNo = pageCount - 1;
+                        break;
+                }
+                fnLoadPage();
+            });
+        });
+
+        var pageNo = 0;
+        var pageCount = @ViewBag.Count
+        id = "@Url.RequestContext.RouteData.Values["id"]"
+        function fnLoadPage() {
+            $.ajax({
+                url: "/Product/ProductList",
+                data: { Id: id, pageNo: pageNo },
+                success: function (result) {
+                    $("#results").html(result);
+                }
+            });
+        }
+    </script>
+}
+<style id="cart-fly"></style>

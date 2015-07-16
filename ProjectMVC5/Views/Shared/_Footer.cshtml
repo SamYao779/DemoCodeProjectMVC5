@@ -1,0 +1,38 @@
+﻿<div class="p-footer-content">
+    <div class="p-footer-left">
+        <span>Đặt hàng và thu tiền tận nơi toàn quốc</span>
+        <p>(08) 113 114</p>
+        <span>Khiếu nại && phản ánh</span>
+        <p>(08) 113</p>
+    </div>
+    <div class="p-footer-right">
+        <div class="p-footer-right-box">
+            <span><b>Tài khoản</b></span>
+            @if (Request.IsAuthenticated)
+            {
+                <p><a href="/Account/LogOff">Đăng xuất</a></p>
+            }
+            else
+            {
+                <p><a href="/Account/Login" class="login">Đăng nhập</a></p>
+            }
+            <p><a href="/Cart/Index">Xem Giỏ hàng</a></p>
+        </div>
+        <div class="p-footer-right-box">
+            <span><b>Thông tin</b></span>
+            <p><a href="#">Tuyển dụng</a></p>
+            <p><a href="#">Đặt hàng trực tuyến</a></p>
+            <p><a href="#">Giới thiệu về công ty</a></p>
+        </div>
+        <div class="p-footer-right-box">
+            <span><b>Dịch vụ</b></span>
+            <p><a href="#">Vận chuyển</a></p>
+            <p><a href="#">Chính sách đổi trả</a></p>
+            <p><a href="#">Chính sách bảo hành</a></p>
+            <p><a href="#">Khách hàng VIP</a></p>
+        </div>
+        <div class="p-footer-bottom">
+            <p>&copy; @DateTime.Now.Year - Design by Sam Yao . All rights reserved</p>
+        </div>
+    </div>
+</div>

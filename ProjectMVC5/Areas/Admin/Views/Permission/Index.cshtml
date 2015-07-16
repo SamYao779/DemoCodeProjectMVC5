@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNet.Identity.EntityFramework
+@{
+    ViewBag.Title = "Index";
+    var perm = ViewBag.Permission as List<Permission>;
+}
+
+<h2>Permission Manager</h2>
+
+@foreach (IdentityRole r in ViewBag.Role)
+{
+    <fieldset>
+        <legend>@r.Name</legend>
+        <ol>
+            @foreach (WebAction we in ViewBag.WebAction)
+            {
+                <li class="col-md-3">
+                    @if (perm.Any(p => p.RoleId == r.Id && p.WebActionId == we.Id && p.Allow == true))
+                    {
+                        <input checked type="checkbox" data-role="@r.Id" data-action="@we.Id" class="check" />@we.Name
+                    }
+                    else
+                    {
+                        <input type="checkbox" data-role="@r.Id" data-action="@we.Id" class="check"/>@we.Name
+                    }
+                </li>
+            }
+        </ol>
+    </fieldset><br />
+}
+
+@section Scripts{
+    <script>
+        $(function () {
+            $(".check").click(function () {
+                var roleId = $(this).attr("data-role");
+                var actionId = $(this).attr("data-action");
+
+                $.ajax({
+                    url: "/Admin/Permission/Update",
+                    data: { Role_Id: roleId, WebAction_Id: actionId },
+                    success: function (result) {
+                        // alert(result);
+                    }
+                });
+            });
+        });
+    </script>
+}
